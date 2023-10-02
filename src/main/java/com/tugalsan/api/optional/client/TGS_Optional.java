@@ -14,7 +14,7 @@ public class TGS_Optional<T> {
     private TGS_Optional(T value) {
         payload = Optional.of(value);
     }
-    final public Optional payload;
+    final public Optional<T> payload;
     public List<CharSequence> info = new ArrayList();
 
     public static <T> TGS_Optional<T> of(T value) {
@@ -23,6 +23,10 @@ public class TGS_Optional<T> {
 
     public static <T> TGS_Optional<T> ofEmpty() {
         return new TGS_Optional();
+    }
+
+    public static <T> TGS_Optional<T> ofEmpty(CharSequence... newInfo) {
+        return new TGS_Optional().addInfo(newInfo);
     }
 
     public TGS_Optional<T> addInfo(CharSequence... newInfo) {
