@@ -33,4 +33,18 @@ public class TGS_Optional<T> {
         Arrays.stream(newInfo).forEachOrdered(cs -> info.add(cs));
         return this;
     }
+
+    public T orThrowFirstInfo() {
+        if (payload.isEmpty()) {
+            if (info.isEmpty()) {
+                throw new RuntimeException("info is empty");
+            }
+            throw new RuntimeException(info.getFirst().toString());
+        }
+        return payload.get();
+    }
+
+    public T orElse(T elseIfEmpty) {
+        return payload.isEmpty() ? elseIfEmpty : payload.get();
+    }
 }
