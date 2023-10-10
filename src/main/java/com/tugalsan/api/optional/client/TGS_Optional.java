@@ -47,4 +47,9 @@ public class TGS_Optional<T> {
     public T orElse(T elseIfEmpty) {
         return payload.isEmpty() ? elseIfEmpty : payload.get();
     }
+
+    @Override
+    public String toString() {
+        return TGS_Optional.class.getSimpleName() + "{" + "payload=" + payload + ", info=" + info + '}';
+    }
 }
