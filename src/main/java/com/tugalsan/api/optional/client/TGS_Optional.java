@@ -30,7 +30,7 @@ public class TGS_Optional<T> {
     }
 
     public TGS_Optional<T> addInfo(CharSequence... newInfo) {
-        Arrays.stream(newInfo).forEachOrdered(cs -> info.add(cs));
+        Arrays.stream(newInfo).filter(info -> info != null).forEachOrdered(cs -> info.add(cs));
         return this;
     }
 
