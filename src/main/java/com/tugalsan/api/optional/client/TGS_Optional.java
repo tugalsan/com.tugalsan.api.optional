@@ -49,38 +49,6 @@ public class TGS_Optional<T> {
         return this;
     }
 
-    public boolean hasPayloadPresentAndInfoPresent() {
-        return hasPayloadPresent() && hasInfoPresent();
-    }
-
-    public boolean hasPayloadPresentAndInfoEmpty() {
-        return hasPayloadPresent() && hasInfoEmpty();
-    }
-
-    public boolean hasPayloadEmptyAndInfoPresent() {
-        return hasPayloadEmpty() && hasInfoPresent();
-    }
-
-    public boolean hasPayloadEmptyAndInfoEmpty() {
-        return hasPayloadEmpty() && hasInfoEmpty();
-    }
-
-    public boolean hasPayloadEmpty() {
-        return payload.isEmpty();
-    }
-
-    public boolean hasPayloadPresent() {
-        return !payload.isEmpty();
-    }
-
-    public boolean hasInfoEmpty() {
-        return info.isEmpty();
-    }
-
-    public boolean hasInfoPresent() {
-        return !info.isEmpty();
-    }
-
     public CharSequence getFirstInfoOr(CharSequence noInfo) {
         return info.isEmpty() ? noInfo : info.getFirst();
     }
