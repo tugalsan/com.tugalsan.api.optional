@@ -53,6 +53,10 @@ public class TGS_Optional<T> {
         return info.isEmpty() ? noInfo : info.getFirst();
     }
 
+    public <T> TGS_Optional<T> toEmptyFirstInfoOr(CharSequence noInfo) {
+        return info.isEmpty() ? TGS_Optional.ofEmpty(noInfo) : TGS_Optional.ofEmpty(info.getFirst());
+    }
+
     public T orThrowFirstInfo() {
         if (payload.isEmpty()) {
             if (info.isEmpty()) {
