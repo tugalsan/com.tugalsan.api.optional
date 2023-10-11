@@ -25,13 +25,60 @@ public class TGS_Optional<T> {
         return new TGS_Optional();
     }
 
+    public static <T> TGS_Optional<T> ofEmpty(Exception... newInfo) {
+        return new TGS_Optional().addInfo(newInfo);
+    }
+
     public static <T> TGS_Optional<T> ofEmpty(CharSequence... newInfo) {
         return new TGS_Optional().addInfo(newInfo);
+    }
+
+    public TGS_Optional<T> addInfo(Exception... newInfo) {
+        Arrays.stream(newInfo).filter(info -> info != null).map(e -> {
+            var msg = e.getMessage();
+            if (msg != null && !msg.isEmpty()) {
+                return msg;
+            }
+            return e.getClass().getName();
+        }).forEachOrdered(cs -> info.add(cs));
+        return this;
     }
 
     public TGS_Optional<T> addInfo(CharSequence... newInfo) {
         Arrays.stream(newInfo).filter(info -> info != null).forEachOrdered(cs -> info.add(cs));
         return this;
+    }
+
+    public boolean hasPayloadPresentAndInfoPresent() {
+        return hasPayloadPresent() && hasInfoPresent();
+    }
+
+    public boolean hasPayloadPresentAndInfoEmpty() {
+        return hasPayloadPresent() && hasInfoEmpty();
+    }
+
+    public boolean hasPayloadEmptyAndInfoPresent() {
+        return hasPayloadEmpty() && hasInfoPresent();
+    }
+
+    public boolean hasPayloadEmptyAndInfoEmpty() {
+        return hasPayloadEmpty() && hasInfoEmpty();
+    }
+
+    public boolean hasPayloadEmpty() {
+        return payload.isEmpty();
+    }
+
+    public boolean hasPayloadPresent() {
+        return !payload.isEmpty();
+    }
+
+    public boolean hasInfoEmpty() {
+        return info.isEmpty();
+    }
+
+    public boolean hasInfoPresent() {
+        return !info.isEmpty();
     }
 
     public T orThrowFirstInfo() {
