@@ -81,6 +81,10 @@ public class TGS_Optional<T> {
         return !info.isEmpty();
     }
 
+    public CharSequence getFirstInfoOr(CharSequence noInfo) {
+        return info.isEmpty() ? noInfo : info.getFirst();
+    }
+
     public T orThrowFirstInfo() {
         if (payload.isEmpty()) {
             if (info.isEmpty()) {
