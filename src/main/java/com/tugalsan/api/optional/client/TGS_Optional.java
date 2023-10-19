@@ -72,7 +72,7 @@ public class TGS_Optional<T> {
             if (info.isEmpty()) {
                 throw new RuntimeException("info is empty");
             }
-            throw new RuntimeException(String.join("\n", info) + "\n");
+            throw new RuntimeException(String.join(" | ", info));
         }
         return payload.get();
     }
