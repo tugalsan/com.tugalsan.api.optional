@@ -67,6 +67,16 @@ public class TGS_Optional<T> {
         return payload.get();
     }
 
+    public T orThrowAllInfo() {
+        if (payload.isEmpty()) {
+            if (info.isEmpty()) {
+                throw new RuntimeException("info is empty");
+            }
+            throw new RuntimeException(String.join("\n", info) + "\n");
+        }
+        return payload.get();
+    }
+
     public T orElse(T elseIfEmpty) {
         return payload.isEmpty() ? elseIfEmpty : payload.get();
     }
