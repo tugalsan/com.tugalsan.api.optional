@@ -2,15 +2,14 @@ package com.tugalsan.api.optional.client;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class TGS_OptionalBoolean {
 
     private TGS_OptionalBoolean(TGS_Optional< Boolean> driver) {
-        this.payload = driver.payload;
+        this.payload = driver.payload.get();
         this.info = driver.info;
     }
-    final public Optional<Boolean> payload;
+    final public boolean payload;
     public List<CharSequence> info = new ArrayList();
 
     public static TGS_OptionalBoolean ofTrue() {
@@ -34,27 +33,27 @@ public class TGS_OptionalBoolean {
     }
 
     public boolean orThrowFirstInfo() {
-        if (payload.isEmpty()) {
+        if (payload == false) {
             if (info.isEmpty()) {
                 throw new RuntimeException("info is empty");
             }
             throw new RuntimeException(info.getFirst().toString());
         }
-        return payload.get();
+        return payload;
     }
 
     public boolean orThrowAllInfo() {
-        if (payload.isEmpty()) {
+        if (payload == false) {
             if (info.isEmpty()) {
                 throw new RuntimeException("info is empty");
             }
             throw new RuntimeException(String.join(" | ", info));
         }
-        return payload.get();
+        return payload;
     }
 
-    public boolean orElse(Boolean elseIfEmpty) {
-        return payload.isEmpty() ? elseIfEmpty : payload.get();
+    public boolean orElse(boolean elseIfEmpty) {
+        return payload == false ? elseIfEmpty : payload;
     }
 
     @Override
